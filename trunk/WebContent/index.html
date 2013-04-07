@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GuestBook</title>
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src='js/ajaxRequest.js'></script>
+<script type="text/javascript" src='js/guestbook.js'></script>
+</head>
+<body>
+<h1>Guest Book<span id="loadingMsg" style="display:none;" class="msgBox">(loading...)</span></h1>
+<ul id="msgList">
+</ul>
+
+<form name="fmMsg" id="fmMsg" action="?" method="post">
+    <h2>Massage<span id="submitMsg" style="display:none;" class="msgBox">(loading...)</span></h2>
+    <label for="txtName">name</label>
+    <input name="txtName" id="txtName" type="text" value="guest" onfocus="this.select();"/>
+    <label for="txtContent">Message</label>
+    <textarea name="txtContent" id="txtContent" rows="4" onfocus="this.select()">Say something...</textarea>
+    <label for="txtCode">Code</label>
+    <input name="txtCode" id="txtCode" type="text" maxlength=4 value="" onfocus="this.select();"/>
+    <img src='http://localhost:8080/guestBook/validateCode' /><br>
+    <input type="button" value="Click here to submit your message!" id="btnSubmit" disabled="disabled"/>
+</form>
+</body>
+
+</html>

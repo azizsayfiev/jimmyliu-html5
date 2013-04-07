@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#floatAds {
+position:absolute;
+width:200px;
+height:50px;
+z-index:1;
+left:11px;
+top:100px;
+background-color:#000099;
+font-size:20px;
+text-align:center;
+line-height:50px;
+color:#fff;
+}
+
+body {
+height:10000px;
+background-color:#eee;
+font-family:Tahoma;
+}
+</style>
+<script type="text/javascript">
+function addEvent(obj,name,handler,useCapture)
+{	
+		obj.addEventListener(name,handler,useCapture);
+}
+var interval = null;
+var timeout = null;
+var targetPosition;
+
+function init()
+{
+	addEvent(window,'scroll',scrollEventHandler,false);
+}
+
+function scrollEventHandler()
+{
+	if(timeout)
+	{
+        clearTimeOut(timeout);
+	}
+	setTimeout(startFloat,50);
+}
+
+function startFloat()
+{
+	var ads = document.getElementById('floatAds');
+	targetPosition = (document.body.scrollTop) + 100;
+	if(parseInt(ads.style.top) != targetPosition)
+	{
+	    if(interval != null)
+	    {
+	    	clearInterval(interval);
+	    	
+	    }
+	    interval = setInterval(doFloat,1);
+	}
+}
+
+function doFloat()
+{
+	var ads = document.getElementById("floatAds");
+	var currentPosition = ads.offsetTop;
+	if(currentPosition < targetPosition)
+	{
+	    ads.style.top = currentPosition + 1 + 'px';
+	}
+	else if (currentPosition > targetPosition)
+	{
+	    ads.style.top = currentPosition - 1 + 'px';
+	}
+	else
+	{
+		clearInterval(interval);
+		interval = null;
+	}
+}
+window.onload = init;
+</script>
+</head>
+<body>
+<div id="floatAds">Advertisement</div>
+</body>
+</html>
