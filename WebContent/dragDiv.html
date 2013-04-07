@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#dragDiv{
+position:absolute;
+width:200px;
+height:115px;
+z-index:1;
+left:40px;
+top:51px;
+background-color:#3300CC;
+cursor:pointer;
+
+}
+</style>
+
+<script type="text/javascript">
+function addEvent(obj,name,handler,useCapture)
+{
+	obj.addEventListener(name,handler,useCapture);
+}
+
+var dragable = false;
+var mousePosition = [];
+
+function mouseDownEventHandler(evt)
+{
+	dragable = true;
+	var evt = evt ||event;
+	var mouseX = (document.body.scrollLeft) + evt.clientX;
+	var mouseY = document.body.scrollTop + evt.clientY;
+	
+	mousePosition = [mouseX,mouseY];
+}
+
+function mouseMoveEventHandler(evt)
+{
+    if (!dragable)
+    {
+    	return;
+    }
+    var evt = evt ||event;
+    var mouseX = (document.body.scrollLeft) + evt.clientX;
+    var mouseY = document.body.scrollTop + evt.clientY;
+    div.style.left = div.style.left + mouseX - mousePosition[0] + 'px';
+    div.style.top = div.style.top + mouseX - mousePosition[1] + 'px';
+    mousePosition = [mouseX,mouseY];
+}
+
+function mouseUpEventHandler()
+{
+	dragable = false;
+}
+
+function init()
+{
+	div = document.getElementById('dragDiv');
+	addEvent(div,'mousedown',mouseDownEventHandler,false);
+	addEvent(document,'mousemove',mouseMoveEventHandler,false);
+	addEvent(div,'mouseup',mouseUpEventHandler,false);
+}
+
+window.onload = init;
+
+</script>
+</head>
+<body>
+
+<div id="dragDiv"></div>
+</body>
+</html>
